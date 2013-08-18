@@ -27,9 +27,16 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step to "submit" the search form on the homepage
   # enter step(s) to ensure that PG and R movies are visible
   # enter step(s) to ensure that other movies are not visible
+  Given I check the following ratings: PG, R
+  And I uncheck the following ratings: G, PG-13, NC-17
+  When I press "Refresh"
+  Then I should see "R" within "tr"
+  And I should not see "G" within "tr"
 
 Scenario: no ratings selected
   # see assignment
+  Then I should see all of the movies
 
 Scenario: all ratings selected
   # see assignment
+  Then I should see all of the movies
